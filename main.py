@@ -5,7 +5,7 @@
 import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
-import pprint
+from pathlib import Path
 
 # (5/5 points) Initial comments with your name, class and project at the top of your .py file.
 
@@ -42,6 +42,12 @@ def getClosing(ticker):
         closingList.append(round(price, 2))
 
     return closingList
+
+try:
+    # Create our charts folder
+    Path("Charts").mkdir()
+except FileExistsError:
+    pass
 
 # stocks list
 stocks = ["MSFT", "AAPL", "EBT-USD", "HYMTF", "SONY"]
