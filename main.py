@@ -71,3 +71,5 @@ for stock in stocks:
 
     # Show graph
     plt.show()
+
+
