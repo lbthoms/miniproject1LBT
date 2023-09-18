@@ -27,6 +27,7 @@ import pprint
 
 
 
+#function to get closing stock price from all stocks
 def getClosing(ticker):
     #get the closing price for the last 10 trading days
     stock = yf.Ticker(ticker)
@@ -43,11 +44,30 @@ def getClosing(ticker):
     return closingList
 
 # stocks list
-stocks = ["MSFT", "AAPL", "META", "HYMTF", "SONY"]
+stocks = ["MSFT", "AAPL", "EBT-USD", "HYMTF", "SONY"]
 
-msftClosing = np.array(getClosing("MSFT"))
+# print graphs
+for stock in stocks:
+    stockClosing = np.array(getClosing(stock))
+    days = list(range(1, len(stockClosing)+1))
 
-plt.plot(msftClosing)
-plt.xlabel("Days")
-plt.ylabel("Closing  Price")
-plt.show()
+    # This plots the graph
+    plt.plot(days, stockClosing)
+
+    # get the min and max for y
+    prices = getClosing(stock)
+    prices.sort()
+    low_price = prices[0]
+    high_price = prices[-1]
+
+    #Set X axis min and max
+    # form [xmin, xmax, ymin, ymax]
+    plt.axis([10, 1, low_price-2, high_price+2])
+
+    # Set label for the graph
+    plt.xlabel("Days Ago")
+    plt.ylabel("Closing  Price")
+    plt.title("Closing Price for " + stock)
+
+    # Show graph
+    plt.show()
