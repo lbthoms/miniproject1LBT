@@ -110,3 +110,4 @@ for stock in getStocks():
         getClosing(stock)
         printGraph(stock)
 
+# end project
